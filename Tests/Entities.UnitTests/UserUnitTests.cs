@@ -1,4 +1,4 @@
-using Bank.Entities;
+using PurrBank.Entities;
 
 namespace Entities.UnitTests;
 

@@ -1,9 +1,7 @@
-using Bank.BusinessRules.Commands.UserCommand;
-using Bank.BusinessRules.EntitiesLogic.UserLogic;
-using Bank.BusinessRules.EntitiesLogic.UserLogic.Contract;
-using Bank.Entities;
-using Bank.Repository.Contracts;
-using Bank.Tools;
+using PurrBank.BusinessRules.Commands.UserCommand;
+using PurrBank.BusinessRules.EntitiesLogic.UserLogic.Contract;
+using PurrBank.Entities;
+using PurrBank.Tools;
 using Tests.Helper;
 using Xunit;
 
@@ -48,7 +46,7 @@ public class UserLogicUnitTests
         //arrange
         var newFirstName = "new first name";
         var newLastName = "new last name";
-        var command = new UpdateUserCommand() {FirstName = newFirstName, LastName = newLastName };
+        var command = new UpdateUserCommand() { FirstName = newFirstName, LastName = newLastName };
         var user = new User(StandardFirstName, StandardLastName, StandardEmail);
 
         //act

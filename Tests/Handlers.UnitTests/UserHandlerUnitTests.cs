@@ -1,7 +1,7 @@
-using Bank.BusinessRules.Commands.UserCommand;
-using Bank.BusinessRules.Queries.UserQueries;
-using Bank.Tools;
 using MediatR;
+using PurrBank.BusinessRules.Commands.UserCommand;
+using PurrBank.BusinessRules.Queries.UserQueries;
+using PurrBank.Tools;
 using Tests.Helper;
 using Tests.Helper.Orderer;
 using Xunit;
@@ -29,8 +29,8 @@ public class UserHandlerUnitTests : IDisposable
     public void GivenCreateCommand_ShoudlCreateUser()
     {
         //arrange
-        var command = new CreateUserCommand() { FirstName = StandardFirstName, LastName= StandardLastName, Email= $"1{StandardEmail}" };
-        
+        var command = new CreateUserCommand() { FirstName = StandardFirstName, LastName = StandardLastName, Email = $"1{StandardEmail}" };
+
         //act
         var result = _mediator.Send(command);
         result.Wait();
@@ -74,7 +74,7 @@ public class UserHandlerUnitTests : IDisposable
         created.Wait();
         var idCreated = created.Result.Result.Id;
 
-        var query = new GetUserByIdQuery() { Id = idCreated};
+        var query = new GetUserByIdQuery() { Id = idCreated };
 
         //act
         var result = _mediator.Send(query);
@@ -96,7 +96,7 @@ public class UserHandlerUnitTests : IDisposable
         created.Wait();
         var idCreated = created.Result.Result.Id;
 
-        var query = new GetUserByFilterQuery() {Email = created.Result.Result.Email };
+        var query = new GetUserByFilterQuery() { Email = created.Result.Result.Email };
 
         //act
         var result = _mediator.Send(query);

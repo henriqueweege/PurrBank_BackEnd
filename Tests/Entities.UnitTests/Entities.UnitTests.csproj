@@ -23,8 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Domain\Bank.Entities\Bank.Entities.csproj" />
-    <ProjectReference Include="..\Tests.Helper\Tests.Helper.csproj" />
+    <ProjectReference Include="..\..\Domain\PurrBank.Entities\PurrBank.Entities.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using Bank.Tools;
+﻿using PurrBank.Tools;
 using Tests.Helper.Orderer;
 
 namespace Tools.UnitTests
@@ -12,7 +12,7 @@ namespace Tools.UnitTests
 
         [Fact, TestPriority(1)]
         public void GivenEnvironmentSetToTest_IsTestEnv_ShouldReturnTrue()
-            {
+        {
             //arrange
             EnvironmentSetter.SetTestEnvToTrue();
             //act

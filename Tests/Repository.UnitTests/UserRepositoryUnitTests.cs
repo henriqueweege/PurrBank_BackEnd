@@ -1,7 +1,7 @@
-﻿using Bank.BusinessRules.EntitiesLogic.UserLogic.Contract;
-using Bank.Entities;
-using Bank.Repository.Contracts;
-using Bank.Tools;
+﻿using PurrBank.BusinessRules.EntitiesLogic.UserLogic.Contract;
+using PurrBank.Entities;
+using PurrBank.Repository.Contracts;
+using PurrBank.Tools;
 using Tests.Helper;
 
 namespace Repository.UnitTests

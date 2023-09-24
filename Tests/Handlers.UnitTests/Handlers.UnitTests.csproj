@@ -24,8 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Domain\Bank.BusinessRules\Bank.BusinessRules.csproj" />
-    <ProjectReference Include="..\..\Tools\Bank.Tools\Bank.Tools.csproj" />
+    <ProjectReference Include="..\..\Domain\PurrBank.BusinessRules\PurrBank.BusinessRules.csproj" />
+    <ProjectReference Include="..\..\Tools\PurrBank.Tools\PurrBank.Tools.csproj" />
     <ProjectReference Include="..\Tests.Helper\Tests.Helper.csproj" />
   </ItemGroup>
 

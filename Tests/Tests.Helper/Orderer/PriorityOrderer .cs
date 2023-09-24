@@ -2,7 +2,7 @@
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-[assembly: CollectionBehavior(DisableTestParallelization = true)] 
+[assembly: CollectionBehavior(DisableTestParallelization = true)]
 namespace Tests.Helper.Orderer
 {
     public class PriorityOrderer : ITestCaseOrderer

@@ -1,6 +1,4 @@
-﻿using Bank.IoC;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 
 namespace Tests.Helper;
 
@@ -14,10 +12,10 @@ public static class DIHandler
         _Host = Host.CreateDefaultBuilder()
              .ConfigureServices(services =>
              {
-                 services.AddRepositories();
-                 services.AddDbContext();
-                 services.AddEntitiesLogics();
-                 services.AddMediatR();
+                 //services.AddRepositories();
+                 //services.AddDbContext();
+                 //services.AddEntitiesLogics();
+                 //services.AddMediatR();
              })
              .Build();
 

@@ -11,8 +11,4 @@
     <PackageReference Include="xunit.extensibility.core" Version="2.4.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Infrastructure\Bank.IoC\Bank.IoC.csproj" />
-  </ItemGroup>
-
 </Project>
