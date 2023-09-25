@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Restore Entity Tests
-        run: dotnet restore ./Tests/Entities.UnitTests/Entities.UnitTests.csproj
+        run: dotnet restore PurrBank_BackEnd/Tests/Entities.UnitTests/Entities.UnitTests.csproj
       - name: Build Entity Tests
-        run: dotnet build ./Tests/Entities.UnitTests/Entities.UnitTests.csproj
+        run: dotnet build PurrBank_BackEnd/Tests/Entities.UnitTests/Entities.UnitTests.csproj
       - name: Run Entity Tests
-        run:  dotnet test --no-build --verbosity normal ./Tests/Entities.UnitTests/Entities.UnitTests.csproj
+        run:  dotnet test --no-build --verbosity normal PurrBank_BackEnd/Tests/Entities.UnitTests/Entities.UnitTests.csproj
       
           
 
