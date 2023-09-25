@@ -24,12 +24,12 @@ jobs:
         run:  dotnet test --no-build --verbosity normal ./Tests/Entities.UnitTests/Entities.UnitTests.csproj
       
       
-      - name: Restore Entities Logic Tests
-        run: dotnet restore ./Tests/EntitiesLogic.UnitTests/EntitiesLogic.UnitTests.csproj
-      - name: Build Entities Logic Tests
-        run: dotnet build ./Tests/EntitiesLogic.UnitTests/EntitiesLogic.UnitTests.csproj
-      - name: Run Entities Logic Tests
-        run:  dotnet test --no-build --verbosity normal ./Tests/EntitiesLogic.UnitTests/EntitiesLogic.UnitTests.csproj
+      - name: Restore Entities Logics Tests
+        run: dotnet restore ./Tests/EntitiesLogics.UnitTests/EntitiesLogics.UnitTests.csproj
+      - name: Build Entities Logics Tests
+        run: dotnet build ./Tests/EntitiesLogics.UnitTests/EntitiesLogics.UnitTests.csproj
+      - name: Run Entities Logics Tests
+        run:  dotnet test --no-build --verbosity normal ./Tests/EntitiesLogics.UnitTests/EntitiesLogics.UnitTests.csproj
       
       
       - name: Restore Handlers Tests
