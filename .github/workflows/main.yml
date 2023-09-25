@@ -16,11 +16,11 @@ jobs:
         with:
           dotnet-version: 7.0.x
       - name: Restore Entity Tests
-        run: dotnet restore ./Tests/Entities.UnitTests/*.csproj
+        run: dotnet restore ./Tests/Entities.UnitTests/Entities.UnitTests.csproj
       - name: Build Entity Tests
-        run: dotnet build PurrBank_BackEnd/Tests/Entities.UnitTests/Entities.UnitTests.csproj
+        run: dotnet build ./Tests/Entities.UnitTests/Entities.UnitTests.csproj
       - name: Run Entity Tests
-        run:  dotnet test --no-build --verbosity normal PurrBank_BackEnd/Tests/Entities.UnitTests/Entities.UnitTests.csproj
+        run:  dotnet test --no-build --verbosity normal ./Tests/Entities.UnitTests/Entities.UnitTests.csproj
       
           
 
