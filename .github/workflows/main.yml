@@ -18,8 +18,6 @@ jobs:
         dotnet-version: 7.0.x
     - name: Restore dependencies
       run: dotnet restore ./PurrBank.sln
-    - name: Build
-      run: dotnet build --no-restore  ./PurrBank.sln
     - name: Entities Tests
       run: dotnet test --no-build --verbosity normal ./Tests/Entities.UnitTests/Entities.UnitTests.csproj
     - name: Entities Logic Tests
@@ -30,4 +28,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal ./Tests/Repository.UnitTests/Repository.UnitTests.csproj
     - name: Tools Tests
       run: dotnet test --no-build --verbosity normal ./Tests/Tools.UnitTests/Tools.UnitTests.csproj
+    - name: Build
+      run: dotnet build --no-restore  ./PurrBank.sln
+
     
