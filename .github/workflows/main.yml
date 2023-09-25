@@ -1,0 +1,75 @@
+name: .NET CI
+
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+      
+      - name: Restore Entities Tests
+        run: dotnet restore ./Tests/Entities.UnitTests/Entities.UnitTests.csproj
+      - name: Build Entities Tests
+        run: dotnet build ./Tests/Entities.UnitTests/Entities.UnitTests.csproj
+      - name: Run Entities Tests
+        run:  dotnet test --no-build --verbosity normal ./Tests/Entities.UnitTests/Entities.UnitTests.csproj
+      
+      
+      - name: Restore Entities Logics Tests
+        run: dotnet restore ./Tests/EntitiesLogics.UnitTests/EntitiesLogics.UnitTests.csproj
+      - name: Build Entities Logics Tests
+        run: dotnet build ./Tests/EntitiesLogics.UnitTests/EntitiesLogics.UnitTests.csproj
+      - name: Run Entities Logics Tests
+        run:  dotnet test --no-build --verbosity normal ./Tests/EntitiesLogics.UnitTests/EntitiesLogics.UnitTests.csproj
+      
+      
+      - name: Restore Handlers Tests
+        run: dotnet restore ./Tests/Handlers.UnitTests/Handlers.UnitTests.csproj
+      - name: Build Handlers Tests
+        run: dotnet build ./Tests/Handlers.UnitTests/Handlers.UnitTests.csproj
+      - name: Run Handlers Tests
+        run:  dotnet test --no-build --verbosity normal ./Tests/Handlers.UnitTests/Handlers.UnitTests.csproj
+
+      - name: Restore Repository Tests
+        run: dotnet restore ./Tests/Repository.UnitTests/Repository.UnitTests.csproj
+      - name: Build Repository Tests
+        run: dotnet build ./Tests/Repository.UnitTests/Repository.UnitTests.csproj
+      - name: Run Repository Tests
+        run:  dotnet test --no-build --verbosity normal ./Tests/Repository.UnitTests/Repository.UnitTests.csproj
+      
+      - name: Restore Tools Tests
+        run: dotnet restore ./Tests/Tools.UnitTests/Tools.UnitTests.csproj
+      - name: Build Tools Tests
+        run: dotnet build ./Tests/Tools.UnitTests/Tools.UnitTests.csproj
+      - name: Run Tools Tests
+        run:  dotnet test --no-build --verbosity normal ./Tests/Tools.UnitTests/Tools.UnitTests.csproj
+  
+  
+  build_solution:
+    needs: tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+      - name: restore solution
+        run: dotnet restore ./PurrBank.sln
+      - name: build solution
+        run: dotnet build ./PurrBank.sln
+      
+          
+
+    
+    
