@@ -1,0 +1,33 @@
+name: .NET CI
+
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  tests:
+    
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+    - name: Restore dependencies
+      run: dotnet restore ./PurrBank.sln
+    - name: Build
+      run: dotnet build --no-restore  ./PurrBank.sln
+    - name: Entities Tests
+      run: dotnet test --no-build --verbosity normal ./Tests/Entities.UnitTests/Entities.UnitTests.csproj
+    - name: Entities Logic Tests
+      run: dotnet test --no-build --verbosity normal ./Tests/EntitiesLogic.UnitTests/EntitiesLogic.UnitTests.csproj
+    - name: Handlers Tests
+      run: dotnet test --no-build --verbosity normal ./Tests/Handlers.UnitTests/Handlers.UnitTests.csproj
+    - name: Repository Tests
+      run: dotnet test --no-build --verbosity normal ./Tests/Repository.UnitTests/Repository.UnitTests.csproj
+    - name: Tools Tests
+      run: dotnet test --no-build --verbosity normal ./Tests/Tools.UnitTests/Tools.UnitTests.csproj
+    
