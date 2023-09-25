@@ -10,6 +10,7 @@ using PurrBank.BusinessRules.Queries;
 using PurrBank.BusinessRules.Queries.UserQueries;
 using PurrBank.Entities;
 using PurrBank.Repository.Base.Contracts;
+using System.ComponentModel.DataAnnotations;
 
 namespace PurrBank.BusinessRules.Handlers
 {
@@ -30,10 +31,15 @@ namespace PurrBank.BusinessRules.Handlers
 
         public Task<CommandResult<User>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
+            if(!new EmailAddressAttribute().IsValid(request.Email))
+            {
+                return Task.FromResult(new CommandResult<User>(false, EErrorMessages.BAD_REQUEST_INVALID_EMAIL.GetDescription()));
+            }
+
             var exists = Handle(new GetUserByFilterQuery() { Email = request.Email });
             if (exists.Result.Any())
             {
-                return Task.FromResult(new CommandResult<User>(false, EErrorMessages.BAD_REQUEST_EMAIL_USED.GetDescription()));
+                return Task.FromResult(new CommandResult<User>(false, ESuccessMessages.EMAIL_ALREADY_REGISTERED.GetDescription()));
             }
             return Task.FromResult(Handle(request));
         }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
-
+using PurrBank.IoC;
 namespace Tests.Helper;
 
 public static class DIHandler
@@ -12,10 +12,10 @@ public static class DIHandler
         _Host = Host.CreateDefaultBuilder()
              .ConfigureServices(services =>
              {
-                 //services.AddRepositories();
-                 //services.AddDbContext();
-                 //services.AddEntitiesLogics();
-                 //services.AddMediatR();
+                 services.AddRepositories();
+                 services.AddDbContext();
+                 services.AddEntitiesLogics();
+                 services.AddMediatR();
              })
              .Build();
 

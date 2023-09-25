@@ -13,6 +13,4 @@ public enum EErrorMessages
     [Description("BadRequest: email é inválido.")]
     BAD_REQUEST_INVALID_EMAIL = 3,
 
-    [Description("Ok: email já está cadastrado.")]
-    BAD_REQUEST_EMAIL_USED = 4,
 }

@@ -14,6 +14,20 @@ public class UserUnitTests
         StandardEmail = "some@email.com";
     }
 
+
+    [Fact]
+    public void GivenAUserAndInvalidEmail_ChangeEmail_ShouldReturnFalse()
+    {
+        //arrange
+        var user = new User(StandardFirstName, StandardLastName, StandardEmail);
+        var newEmail = "invalidemail";
+
+        //act
+
+        //assert
+        Assert.False(user.ChangeEmail(newEmail));
+    }
+
     [Fact]
     public void GivenAUser_ChangeEmail_ShouldChangeEmail()
     {

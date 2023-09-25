@@ -15,12 +15,24 @@ namespace PurrBank.Entities
         {
             ChangeFirstName(firstName);
             ChangeLastName(lastName);
-            ChangeEmail(email);
+            if (!ChangeEmail(email))
+            {
+                throw new ArgumentException("E-mail inválido");
+            }
+            
         }
 
-        public void ChangeEmail(string newEmail)
+        public bool ChangeEmail(string newEmail)
         {
-            Email = newEmail;
+            if (new EmailAddressAttribute().IsValid(newEmail))
+            {
+                Email = newEmail;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void ChangeFirstName(string newFirstName)
