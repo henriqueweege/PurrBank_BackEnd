@@ -28,7 +28,7 @@ namespace PurrBank.BusinessRules.Handlers.Base
             Repository = repository;
         }
 
-        public override CommandResult<E> Handle(CC command)
+        public override async Task<CommandResult<E>> Handle(CC command)
         {
             try
             {
@@ -52,11 +52,11 @@ namespace PurrBank.BusinessRules.Handlers.Base
 
         }
 
-        public override CommandResult<E> Handle(UC command)
+        public override async Task<CommandResult<E>> Handle(UC command)
         {
             try
             {
-                var entityToUpdate = Repository.GetById(command.Id);
+                var entityToUpdate = await Repository.GetById(command.Id);
 
                 if (entityToUpdate is null)
                 {
@@ -64,7 +64,7 @@ namespace PurrBank.BusinessRules.Handlers.Base
                 }
 
                 entityToUpdate = Logic.UpdateEntity(command, entityToUpdate);
-                var resultCreate = Repository.Update(entityToUpdate);
+                var resultCreate = await Repository.Update(entityToUpdate);
 
                 if (resultCreate is not null)
                 {
@@ -83,18 +83,18 @@ namespace PurrBank.BusinessRules.Handlers.Base
 
         }
 
-        public CommandResult<E> Handle(DC command)
+        public async Task<CommandResult<E>> Handle(DC command)
         {
             try
             {
-                var entityToDelete = Repository.GetById(command.Id);
+                var entityToDelete = await Repository.GetById(command.Id);
 
                 if (entityToDelete is null)
                 {
                     return new CommandResult<E>(true, EErrorMessages.BAD_REQUEST.GetDescription());
                 }
 
-                var deleted = Repository.Delete(entityToDelete);
+                var deleted = await Repository.Delete(entityToDelete);
 
                 if (deleted)
                 {
@@ -109,12 +109,12 @@ namespace PurrBank.BusinessRules.Handlers.Base
             }
         }
 
-        public QueryResult<E> Handle(GBFQ query)
+        public async Task<QueryResult<E>> Handle(GBFQ query)
         {
             try
             {
                 var filter = Logic.GetFilter(query);
-                var entities = Repository.GetByFilter(filter);
+                var entities = await Repository.GetByFilter(filter);
 
                 if (entities != null && entities.Count() > 0)
                 {
@@ -132,11 +132,11 @@ namespace PurrBank.BusinessRules.Handlers.Base
             }
         }
 
-        public QueryResult<E> Handle(GBIQ query)
+        public async Task<QueryResult<E>> Handle(GBIQ query)
         {
             try
             {
-                var entities = Repository.GetById(query.Id);
+                var entities = await Repository.GetById(query.Id);
                 if (entities != null)
                 {
                     return new QueryResult<E>(true, ESuccessMessages.OK_REQUISITON_COMPLETED_SUCCESSFULLY.GetDescription(), entities);

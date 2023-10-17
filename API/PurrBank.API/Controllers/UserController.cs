@@ -5,6 +5,7 @@ using PurrBank.BusinessRules.Commands;
 using PurrBank.BusinessRules.Commands.UserCommand;
 using PurrBank.BusinessRules.Queries.UserQueries;
 using PurrBank.Entities;
+using PurrBank.Tools;
 
 namespace PurrBank.API.Controllers
 {
@@ -14,8 +15,6 @@ namespace PurrBank.API.Controllers
 #pragma warning disable 1591
     public class UserController : ControllerBase
     {
-
-
         /// <summary>
         /// Create a User.
         /// </summary>
@@ -24,8 +23,8 @@ namespace PurrBank.API.Controllers
         [ProducesResponseType(typeof(CommandResult<User>), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(CommandResult<User>), StatusCodes.Status200OK)]
         [HttpPost]
-        public IActionResult CreateUser([FromBody] CreateUserCommand command, [FromServices] IMediator mediator)
-            => Return(mediator.Send(command).Result);
+        public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command, [FromServices] IMediator mediator)
+            => await RestTools<User>.Return(await mediator.Send(command));
         /// <summary>
         /// Get an User by id.
         /// </summary>
@@ -34,8 +33,8 @@ namespace PurrBank.API.Controllers
         [ProducesResponseType(typeof(CommandResult<User>), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(CommandResult<User>), StatusCodes.Status200OK)]
         [HttpGet]
-        public IActionResult GetById([FromQuery] int id, [FromServices] IMediator mediator)
-            => Return(mediator.Send(new GetUserByIdQuery() { Id = id }).Result);
+        public async Task<IActionResult> GetById([FromQuery] int id, [FromServices] IMediator mediator)
+            => await RestTools<User>.Return(await mediator.Send(new GetUserByIdQuery() { Id = id }));
         /// <summary>
         /// Get an User by email.
         /// </summary>
@@ -44,8 +43,8 @@ namespace PurrBank.API.Controllers
         [ProducesResponseType(typeof(CommandResult<User>), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(CommandResult<User>), StatusCodes.Status200OK)]
         [HttpGet]
-        public IActionResult GetByEmail([FromQuery] string email, [FromServices] IMediator mediator)
-            => Return(mediator.Send(new GetUserByFilterQuery() { Email = email }).Result);
+        public async Task<IActionResult> GetByEmail([FromQuery] string email, [FromServices] IMediator mediator)
+            => await RestTools<User>.Return(await mediator.Send(new GetUserByFilterQuery() { Email = email }));
         /// <summary>
         /// Update an User.
         /// </summary>
@@ -54,8 +53,8 @@ namespace PurrBank.API.Controllers
         [ProducesResponseType(typeof(CommandResult<User>), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(CommandResult<User>), StatusCodes.Status200OK)]
         [HttpPut]
-        public IActionResult UpdateUser([FromBody] UpdateUserCommand command, [FromServices] IMediator mediator)
-            => Return(mediator.Send(command).Result);
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand command, [FromServices] IMediator mediator)
+            => await RestTools<User>.Return(await mediator.Send(command));
         /// <summary>
         /// Delete an User.
         /// </summary>
@@ -64,23 +63,8 @@ namespace PurrBank.API.Controllers
         [ProducesResponseType(typeof(CommandResult<User>), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(CommandResult<User>), StatusCodes.Status200OK)]
         [HttpDelete]
-        public IActionResult Delete([FromQuery] int id, [FromServices] IMediator mediator)
-            => Return(mediator.Send(new DeleteUserCommand() { Id = id }).Result);
-        private IActionResult Return(dynamic result)
-        {
-            if (result.Message.Contains("Ok"))
-            {
-                return Ok(result);
-            }
-            else if (result.Message.Contains("BadRequest"))
-            {
-                return BadRequest(result);
-            }
-            else if (result.Message.Contains("NoContent"))
-            {
-                return StatusCode(StatusCodes.Status204NoContent, result);
-            }
-            return StatusCode(StatusCodes.Status500InternalServerError, result);
-        }
+        public async Task<IActionResult> Delete([FromQuery] int id, [FromServices] IMediator mediator)
+            => await RestTools<User>.Return(await mediator.Send(new DeleteUserCommand() { Id = id }));
+
     }
 }

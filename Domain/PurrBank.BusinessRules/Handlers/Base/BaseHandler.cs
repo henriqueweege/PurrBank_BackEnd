@@ -21,6 +21,6 @@ public abstract class BaseHandler<E,
                             where L : class, ILogic<E, CC, UC, GBFQ>
 {
 
-    public abstract CommandResult<E> Handle(CC command);
-    public abstract CommandResult<E> Handle(UC command);
+    public abstract Task<CommandResult<E>> Handle(CC command);
+    public abstract Task<CommandResult<E>> Handle(UC command);
 }

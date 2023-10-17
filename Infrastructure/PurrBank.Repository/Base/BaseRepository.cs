@@ -17,35 +17,35 @@ namespace PurrBank.Repository.Base
             EntitySet = Context.Set<E>();
         }
 
-        public IQueryable<E> GetByFilter(Expression<Func<E, bool>> filter) => EntitySet.Where(filter);
-        public E? GetById(int id) => EntitySet.FirstOrDefault(x => x.Id == id);
+        public async Task<IQueryable<E>> GetByFilter(Expression<Func<E, bool>> filter) => EntitySet.Where(filter);
+        public async Task<E?> GetById(int id) => EntitySet.FirstOrDefault(x => x.Id == id);
 
-        public E? Save(E model)
+        public async Task<E?> Save(E model)
         {
             Context.Add(model);
-            if (Saved())
+            if (await Saved())
             {
                 return model;
             }
             return null;
         }
-        public E? Update(E model)
+        public async Task<E?> Update(E model)
         {
             Context.Update(model);
-            if (Saved())
+            if (await Saved())
             {
                 return model;
             }
             return null;
         }
-        public bool Delete(E model)
+        public async Task<bool> Delete(E model)
         {
             Context.Remove(model);
             return SaveChanges().Result > 0;
         }
 
-        private bool Saved()
-            => SaveChanges().Result > 0;
+        private async Task<bool> Saved()
+            => await SaveChanges() > 0;
 
 
         public Task<int> SaveChanges() => Context.SaveChangesAsync();

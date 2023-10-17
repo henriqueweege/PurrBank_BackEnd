@@ -46,6 +46,6 @@ options.AllowAnyOrigin()
 .AllowAnyHeader()
 );
 app.MapControllers();
-//EnvironmentSetter.SetTestEnvToTrue();
+EnvironmentSetter.SetTestEnvToTrue();
 app.Run();
 

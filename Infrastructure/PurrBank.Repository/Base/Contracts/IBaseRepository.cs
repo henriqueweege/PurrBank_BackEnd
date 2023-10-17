@@ -5,10 +5,10 @@ namespace PurrBank.Repository.Base.Contracts
 {
     public interface IBaseRepository<E> where E : class, IEntity
     {
-        public E? Save(E entity);
-        public IQueryable<E> GetByFilter(Expression<Func<E, bool>> filter);
-        public E? GetById(int id);
-        public E? Update(E entity);
-        public bool Delete(E entity);
+        public Task<E?> Save(E entity);
+        public Task<IQueryable<E>> GetByFilter(Expression<Func<E, bool>> filter);
+        public Task<E?> GetById(int id);
+        public Task<E?> Update(E entity);
+        public Task<bool> Delete(E entity);
     }
 }

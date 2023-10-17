@@ -30,7 +30,7 @@ namespace Repository.UnitTests
             var userToSave = new User(StandardFirstName, StandardLastName, StandardEmail);
 
             //act
-            var userSaved = Repo.Save(userToSave);
+            var userSaved = Repo.Save(userToSave).Result;
 
             //assert
             Assert.True(userSaved.Id > 0);
@@ -45,10 +45,10 @@ namespace Repository.UnitTests
         {
             //arrange
             var userToSave = new User(StandardFirstName, StandardLastName, StandardEmail);
-            var userSaved = Repo.Save(userToSave);
+            var userSaved = Repo.Save(userToSave).Result;
 
             //act
-            var retrieved = Repo.GetById(userSaved.Id);
+            var retrieved = Repo.GetById(userSaved.Id).Result;
 
             //assert
             Assert.Equal(userSaved.Id, retrieved.Id);
@@ -63,14 +63,14 @@ namespace Repository.UnitTests
         {
             //arrange
             var userToSave = new User(StandardFirstName, StandardLastName, StandardEmail);
-            var userSaved = Repo.Save(userToSave);
+            var userSaved = Repo.Save(userToSave).Result;
 
             //act
-            var userDeleted = Repo.Delete(userSaved);
+            var userDeleted = Repo.Delete(userSaved).Result;
 
             //assert
             Assert.True(userDeleted);
-            Assert.Null(Repo.GetByFilter(Logic.GetFilter(new User(null, null, null))).Where(x => x.Id == userSaved.Id).FirstOrDefault());
+            Assert.Null(Repo.GetByFilter(Logic.GetFilter(new User(null, null, null))).Result.Where(x => x.Id == userSaved.Id).FirstOrDefault());
 
         }
 
@@ -79,12 +79,12 @@ namespace Repository.UnitTests
         {
             //arrange
             var userToSave = new User(StandardFirstName, StandardLastName, StandardEmail);
-            var userSaved = Repo.Save(userToSave);
+            var userSaved = Repo.Save(userToSave).Result;
             var newName = "newName";
 
             //act
             userSaved.ChangeFirstName(newName);
-            var userUpdated = Repo.Update(userToSave);
+            var userUpdated = Repo.Update(userToSave).Result;
 
             //assert
             Assert.True(userUpdated.FirstName == newName);
@@ -98,15 +98,15 @@ namespace Repository.UnitTests
             //arrange
             var anotherEmail = "another@mail.com";
             var userToSave1 = new User(StandardFirstName, StandardLastName, StandardEmail);
-            var userSaved1 = Repo.Save(userToSave1);
+            var userSaved1 = Repo.Save(userToSave1).Result;
             var userToSave2 = new User(StandardFirstName, StandardLastName, "another@mail.com");
-            var userSaved2 = Repo.Save(userToSave2);
+            var userSaved2 = Repo.Save(userToSave2).Result;
 
 
 
             //act
             var filter = Logic.GetFilter(new User(null, null, anotherEmail));
-            var returnOfFunciton = Repo.GetByFilter(filter).ToList();
+            var returnOfFunciton = Repo.GetByFilter(filter).Result.ToList();
 
             //assert
             Assert.Equal(userSaved2.Id, returnOfFunciton.FirstOrDefault().Id);

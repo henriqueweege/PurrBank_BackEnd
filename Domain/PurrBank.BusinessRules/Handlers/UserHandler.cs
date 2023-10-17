@@ -25,32 +25,32 @@ namespace PurrBank.BusinessRules.Handlers
         {
         }
 
-        public Task<CommandResult<User>> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
-            => Task.FromResult(Handle(request));
+        public async Task<CommandResult<User>> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+            => await Handle(request);
 
 
-        public Task<CommandResult<User>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResult<User>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             if(!new EmailAddressAttribute().IsValid(request.Email))
             {
-                return Task.FromResult(new CommandResult<User>(false, EErrorMessages.BAD_REQUEST_INVALID_EMAIL.GetDescription()));
+                return new CommandResult<User>(false, EErrorMessages.BAD_REQUEST_INVALID_EMAIL.GetDescription());
             }
 
-            var exists = Handle(new GetUserByFilterQuery() { Email = request.Email });
+            var exists = await Handle(new GetUserByFilterQuery() { Email = request.Email });
             if (exists.Result.Any())
             {
-                return Task.FromResult(new CommandResult<User>(false, ESuccessMessages.EMAIL_ALREADY_REGISTERED.GetDescription()));
+                return new CommandResult<User>(false, ESuccessMessages.EMAIL_ALREADY_REGISTERED.GetDescription());
             }
-            return Task.FromResult(Handle(request));
+            return await Handle(request);
         }
 
-        public Task<CommandResult<User>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
-            => Task.FromResult(Handle(request));
+        public async Task<CommandResult<User>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+            => await Handle(request);
 
-        public Task<QueryResult<User>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
-            => Task.FromResult(Handle(request));
+        public async Task<QueryResult<User>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+            => await Handle(request);
 
-        public Task<QueryResult<User>> Handle(GetUserByFilterQuery request, CancellationToken cancellationToken)
-            => Task.FromResult(Handle(request));
+        public async Task<QueryResult<User>> Handle(GetUserByFilterQuery request, CancellationToken cancellationToken)
+            => await Handle(request);
     }
 }
