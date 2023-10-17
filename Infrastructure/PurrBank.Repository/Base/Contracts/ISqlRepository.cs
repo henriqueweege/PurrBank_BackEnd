@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace PurrBank.Repository.Base.Contracts
 {
-    public interface IBaseRepository<E> where E : class, IEntity
+    public interface ISqlRepository<E> where E : class, IEntity
     {
         public Task<E?> Save(E entity);
         public Task<IQueryable<E>> GetByFilter(Expression<Func<E, bool>> filter);

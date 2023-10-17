@@ -20,7 +20,7 @@ public static class DependenciesExtensions
     {
 
         services.AddTransient<IUserRepository, UserRepository>();
-        services.AddTransient<IBaseRepository<User>, UserRepository>();
+        services.AddTransient<ISqlRepository<User>, UserRepository>();
     }
 
     public static void AddEntitiesLogics(this IServiceCollection services)

@@ -7,11 +7,11 @@ using System.Linq.Expressions;
 
 namespace PurrBank.Repository.Base
 {
-    public class BaseRepository<E> : IDisposable, IBaseRepository<E> where E : class, IEntity
+    public class SqlRepository<E> : IDisposable, ISqlRepository<E> where E : class, IEntity
     {
         private DataContext Context { get; set; }
         private DbSet<E> EntitySet { get; set; }
-        public BaseRepository(IDataContext context)
+        public SqlRepository(IDataContext context)
         {
             Context = (DataContext)context;
             EntitySet = Context.Set<E>();

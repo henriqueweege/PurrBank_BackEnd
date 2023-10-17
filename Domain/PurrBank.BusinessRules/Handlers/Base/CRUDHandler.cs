@@ -21,8 +21,8 @@ namespace PurrBank.BusinessRules.Handlers.Base
               where GBIQ : IGetByIdQuery<E>
     {
         private static ILogic<E, CC, UC, GBFQ> Logic { get; set; }
-        private static IBaseRepository<E> Repository { get; set; }
-        public CRUDHandler(ILogic<E, CC, UC, GBFQ> converter, IBaseRepository<E> repository)
+        private static ISqlRepository<E> Repository { get; set; }
+        public CRUDHandler(ILogic<E, CC, UC, GBFQ> converter, ISqlRepository<E> repository)
         {
             Logic = converter;
             Repository = repository;

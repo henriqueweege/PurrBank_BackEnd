@@ -21,7 +21,7 @@ namespace PurrBank.BusinessRules.Handlers
                                IRequestHandler<GetUserByIdQuery, QueryResult<User>>,
                                IRequestHandler<GetUserByFilterQuery, QueryResult<User>>
     {
-        public UserHandler(ILogic<User, CreateUserCommand, UpdateUserCommand, GetUserByFilterQuery> logic, IBaseRepository<User> repository) : base(logic, repository)
+        public UserHandler(ILogic<User, CreateUserCommand, UpdateUserCommand, GetUserByFilterQuery> logic, ISqlRepository<User> repository) : base(logic, repository)
         {
         }
 

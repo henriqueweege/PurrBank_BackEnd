@@ -3,7 +3,7 @@ using PurrBank.Repository.Base.Contracts;
 
 namespace PurrBank.Repository.Contracts
 {
-    public interface IUserRepository : IBaseRepository<User>
+    public interface IUserRepository : ISqlRepository<User>
     {
     }
 }
