@@ -42,12 +42,12 @@ namespace PurrBank.Repository.Base
 
         public virtual async Task Remove(FilterDefinition<E> filterDefinition)
         {
-            _context.Set<E>().DeleteOne(filterDefinition);
+            await _context.Set<E>().DeleteOneAsync(filterDefinition);
         }
 
         public virtual async Task RemoveRange(FilterDefinition<E> filterDefinition)
         {
-            _context.Set<E>().DeleteMany(filterDefinition);
+            await _context.Set<E>().DeleteManyAsync(filterDefinition);
         }
 
         public virtual void Dispose()
