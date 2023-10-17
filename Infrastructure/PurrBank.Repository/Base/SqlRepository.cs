@@ -9,11 +9,11 @@ namespace PurrBank.Repository.Base
 {
     public class SqlRepository<E> : IDisposable, ISqlRepository<E> where E : class, IEntity
     {
-        private DataContext Context { get; set; }
+        private SqlContext Context { get; set; }
         private DbSet<E> EntitySet { get; set; }
-        public SqlRepository(IDataContext context)
+        public SqlRepository(ISqlContext context)
         {
-            Context = (DataContext)context;
+            Context = (SqlContext)context;
             EntitySet = Context.Set<E>();
         }
 

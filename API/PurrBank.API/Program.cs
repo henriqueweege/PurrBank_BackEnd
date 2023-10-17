@@ -29,11 +29,14 @@ builder.Configuration.SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("
 
 builder.Services.AddControllers();
 
-var connectionString = new ConnectionString();
 
-connectionString.MySql = builder.Configuration.GetConnectionString("MySql");
+var mySqlConnectionString = new MySqlConnectionString();
+var mongoSettings = new MongoSettings();
 
-AppSettings.ConnectionString = connectionString;
+mySqlConnectionString.MySql = builder.Configuration.GetConnectionString("MySql");
+builder.Configuration.Bind("MongoSettings", mongoSettings);
+AppSettings.ConnectionString = mySqlConnectionString;
+AppSettings.MongoSettings = mongoSettings;
 
 
 var app = builder.Build();

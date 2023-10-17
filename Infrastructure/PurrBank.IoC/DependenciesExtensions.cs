@@ -31,7 +31,7 @@ public static class DependenciesExtensions
 
     public static void AddDbContext(this IServiceCollection services)
     {
-        services.AddDbContext<IDataContext, DataContext>();
+        services.AddDbContext<ISqlContext, SqlContext>();
         services.AddTransient<DbContextOptionsBuilder>();
     }
 

@@ -5,9 +5,9 @@ using PurrBank.Tools;
 
 namespace PurrBank.Context;
 
-public class DataContext : DbContext, IDataContext
+public class SqlContext : DbContext, ISqlContext
 {
-    public DataContext(DbContextOptionsBuilder dbContextOptionsBuilder) : base(dbContextOptionsBuilder.Options) { }
+    public SqlContext(DbContextOptionsBuilder dbContextOptionsBuilder) : base(dbContextOptionsBuilder.Options) { }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)

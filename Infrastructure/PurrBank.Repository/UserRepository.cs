@@ -7,7 +7,7 @@ namespace PurrBank.Repository
 {
     public class UserRepository : SqlRepository<User>, IUserRepository
     {
-        public UserRepository(IDataContext context) : base(context)
+        public UserRepository(ISqlContext context) : base(context)
         {
         }
     }
